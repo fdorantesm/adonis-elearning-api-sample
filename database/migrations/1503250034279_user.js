@@ -2,10 +2,12 @@
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
+const entities = require('../entities')
 
 class UserSchema extends Schema {
-  up () {
-    this.create('users', (table) => {
+  async up () {
+    const tableExists = await this.hasTable(entities.category)
+    !tableExists && this.create(entities.user, (table) => {
       table.increments()
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
@@ -14,8 +16,8 @@ class UserSchema extends Schema {
     })
   }
 
-  down () {
-    this.drop('users')
+  async down () {
+    await this.hasTable(entities.user) && this.drop(entities.user)
   }
 }
 
