@@ -19,3 +19,8 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.group(() => {
+  Route.get('/', 'CategoryController.index')
+  Route.post('/', 'CategoryController.store')
+}).prefix('/categories').namespace('Core')

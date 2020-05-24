@@ -15,6 +15,7 @@ class CourseSchema extends Schema {
       table.integer('user_id').unsigned().references(entities.keys.primaryKey).inTable(entities.user).onDelete(entities.events.cascade).onUpdate(entities.events.cascade)
       table.boolean(entities.keys.enabled).defaultTo(entities.defaults.enabled)
       table.timestamps()
+      table.date(entities.keys.deleted).defaultTo(null)
     })
   }
 

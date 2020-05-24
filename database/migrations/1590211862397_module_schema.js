@@ -11,9 +11,10 @@ class ModuleSchema extends Schema {
       table.increments()
       table.uuid(entities.keys.privateId)
       table.string('title', 64)
-      table.integer('course_id').unsigned().references('id').inTable(entities.course).onDelete(entities.events.cascade).onUpdate(entities.events.cascade)
-      table.boolean('is_enabled').defaultTo(entities.defaults.enabled)
+      table.integer('course_id').unsigned().references(entities.keys.primaryKey).inTable(entities.course).onDelete(entities.events.cascade).onUpdate(entities.events.cascade)
+      table.boolean(entities.keys.enabled).defaultTo(entities.defaults.enabled)
       table.timestamps()
+      table.date(entities.keys.deleted).defaultTo(null)
     })
   }
 

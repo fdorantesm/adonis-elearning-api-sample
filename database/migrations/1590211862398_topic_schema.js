@@ -13,9 +13,10 @@ class TopicSchema extends Schema {
       table.string('title', 64).notNullable()
       table.string('description', 256).notNullable()
       table.text('content')
-      table.integer('module_id').unsigned().references(entities.keys.primaryKey).inTable(entities.module).onUpdate(entities.events.cascade).onDelete(entities.events.cascade)
+      table.integer('module_id').notNullable().unsigned().references(entities.keys.primaryKey).inTable(entities.module).onDelete(entities.events.cascade).onUpdate(entities.events.cascade)
       table.boolean(entities.keys.enabled).defaultTo(entities.defaults.enabled)
       table.timestamps()
+      table.date(entities.keys.deleted).defaultTo(null)
     })
   }
 

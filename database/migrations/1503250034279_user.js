@@ -9,10 +9,12 @@ class UserSchema extends Schema {
     const tableExists = await this.hasTable(entities.category)
     !tableExists && this.create(entities.user, (table) => {
       table.increments()
+      table.uuid(entities.keys.privateId)
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.timestamps()
+      table.date(entities.keys.deleted).defaultTo(null)
     })
   }
 

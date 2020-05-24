@@ -2,7 +2,8 @@ module.exports = {
   keys: {
     primaryKey: 'id',
     privateId: '_id',
-    enabled: 'is_enabled'
+    enabled: 'is_enabled',
+    deleted: 'deleted_at'
   },
   events: {
     cascade: 'CASCADE',
